@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../data/data_layanan.dart';
+import '../pages/layanan_page.dart';
 
 class PengajuanModel extends ChangeNotifier {
   final List<Layanan> _daftar = [];

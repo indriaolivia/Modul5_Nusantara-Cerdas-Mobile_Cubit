@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/data_layanan.dart';
+import '../pages/layanan_page.dart';
 import '../pages/halaman_pendukung.dart';
 import '../pages/rincian_layanan_page.dart';
 import '../pages/riwayat_laporan_page.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../data/data_layanan.dart';
-import '../models/favorit_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/favorit_cubit.dart';
+import '../pages/layanan_page.dart';
 import '../navigation/app_routes.dart';
 
 class WargaPage extends StatelessWidget {
@@ -27,10 +27,10 @@ class WargaPage extends StatelessWidget {
         const SizedBox(height: 16),
         Text('Layanan Favorit',
             style: Theme.of(context).textTheme.titleMedium),
-        Consumer<FavoritModel>(
-          builder: (context, model, _) {
+        BlocBuilder<FavoritCubit, Set<String>>(
+          builder: (context, namaFavorit) {
             final favorit = semuaLayanan
-                .where((l) => model.apakahFavorit(l.nama))
+                .where((l) => namaFavorit.contains(l.nama))
                 .toList();
 
             if (favorit.isEmpty) {
@@ -51,7 +51,8 @@ class WargaPage extends StatelessWidget {
                     trailing: IconButton(
                       tooltip: 'Hapus dari favorit',
                       icon: const Icon(Icons.star, color: Colors.amber),
-                      onPressed: () => model.batalTandai(l.nama),
+                      onPressed: () =>
+                          context.read<FavoritCubit>().batalTandai(l.nama),
                     ),
                   ),
               ],

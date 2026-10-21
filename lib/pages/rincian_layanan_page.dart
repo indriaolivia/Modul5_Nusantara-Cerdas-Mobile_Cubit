@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../data/data_layanan.dart';
-import '../models/pengajuan_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../pages/layanan_page.dart';
+import '../cubit/pengajuan_cubit.dart';
 
 class RincianLayananPage extends StatefulWidget {
   final Layanan layanan;
@@ -22,7 +22,7 @@ class _RincianLayananPageState extends State<RincianLayananPage> {
     await Future.delayed(const Duration(milliseconds: 1500));
     if (!mounted) return;
 
-    context.read<PengajuanModel>().ajukan(widget.layanan);
+    context.read<PengajuanCubit>().ajukan(widget.layanan);
     setState(() => _sedangMengirim = false);
 
     Navigator.pop(

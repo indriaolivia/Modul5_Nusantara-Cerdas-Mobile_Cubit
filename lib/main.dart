@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'models/favorit_model.dart';
-import 'models/pengajuan_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'cubit/favorit_cubit.dart';
+import 'cubit/pengajuan_cubit.dart';
 import 'navigation/app_routes.dart';
 
 void main() => runApp(const NusantaraCerdasApp());
@@ -11,10 +11,12 @@ class NusantaraCerdasApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    // Berada di atas MaterialApp agar terjangkau oleh semua named route
+    // (termasuk halaman rincian), baik pada layar sempit maupun lebar.
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => FavoritModel()),
-        ChangeNotifierProvider(create: (_) => PengajuanModel()),
+        BlocProvider(create: (_) => FavoritCubit()),
+        BlocProvider(create: (_) => PengajuanCubit()),
       ],
       child: MaterialApp(
         title: 'Nusantara Cerdas Mobile',
